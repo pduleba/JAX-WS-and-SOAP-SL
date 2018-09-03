@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Header />
+	<soapenv:Body>
+		<ns1:GetBookResponse xmlns:ns1='http://www.pduleba.com/BookService/'>
+			<ID>?XXX?</ID>
+			<Title>The Jeweler's Shop</Title>
+			<Author>St. Pope John Paul I</Author>
+		</ns1:GetBookResponse>
+	</soapenv:Body>
+</soapenv:Envelope>

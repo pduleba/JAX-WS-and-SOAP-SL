@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Header />
+	<soapenv:Body>
+		<ns1:GetBookRequest xmlns:ns1='http://www.pduleba.com/BookService/'>
+			<ID>1000</ID>
+		</ns1:GetBookRequest>
+	</soapenv:Body>
+</soapenv:Envelope>

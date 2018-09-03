@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.pduleba</groupId>
+	<artifactId>bookservice</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>BookService</name>
+
+	<properties>
+		<!-- Project properties -->
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Project library versions -->
+		<cxf.version>3.2.6</cxf.version>
+		<lombok.version>1.18.2</lombok.version>
+		<saxon.version>9.5.1-5</saxon.version>
+		<slf4j.version>1.7.25</slf4j.version>
+
+		<!-- Maven plugins versions -->
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+	</properties>
+
+	<dependencies>
+		<!-- CXF -->
+		<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-features-logging</artifactId>
+			<version>${cxf.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Logging :: Binding for System.out -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
+				<dependencies>
+					<!-- Supported version of Saxon implementing JAXP provided by JDK 8 -->
+					<dependency>
+						<groupId>net.sf.saxon</groupId>
+						<artifactId>Saxon-HE</artifactId>
+						<version>${saxon.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/target/generated-sources/jaxws</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/BookService.wsdl</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
